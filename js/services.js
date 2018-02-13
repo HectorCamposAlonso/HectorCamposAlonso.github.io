@@ -1,6 +1,6 @@
 angular.module('myAppServices', ['ngResource']).
 
-    factory('BreakinBadChar', function($resource){
+    factory('datos', function($resource){
 
   return $resource(':resourceName.json', {}, {
 
