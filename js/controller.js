@@ -1,5 +1,5 @@
-function BreakinBadCharCtrl($scope, datos) {
+function BreakinBadCharCtrl($scope, BreakinBadChar) {
 
-	$scope.characters = datos.query();
+	$scope.characters = BreakinBadChar.query();
 
 }
