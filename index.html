@@ -142,17 +142,22 @@
  
     $scope.importar = function(){
  
-      $http.get('datos.json').then(function (success){
-     $scope.equipo = datos;
-   },function (error){
+      $http({
+                method: 'get', 
+                url: 'datos.json'
+        }).then(function (response) {
 
-   });
+            console.log(response, 'res');
+            data = response.data;
+        },function (error){
+            console.log(error, 'can not get data.');
+        });
  
     $scope.importar();
  
 });
  
- 
+
 
 
 </script>
