@@ -1,20 +1,11 @@
 <!DOCTYPE html>
-<html lang="es">
+<html ng-app="datosApp" lang="es">
   <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
     <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/scripts.js"></script>
+    <script src="js/angular.min.js"></script>
     <link rel="stylesheet" href="css/estilos.css"/>
-    <script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
-
-<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
-
-<script type="text/javascript" charset="utf-8" src="js/controller.js"></script>
-
-<script type="text/javascript" charset="utf-8" src="js/services.js"></script>
-
-<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular-resource.min.js"></script>
     <title></title>
   </head>
   <body>
@@ -100,7 +91,15 @@
           <div class="section__subtitle">Diseños Originales y Personalizables</div>
         </div>
         <div class="ed-item">
-          <nav class="links"><a href="#">Semana Santa</a><a href="#">14 de Febrero</a><a href="#">Dia de Muertos</a><a href="#">Navidad</a><a href="#">16 de Septiembre</a></nav>
+          <nav class="links">
+            <a ng-click="count = count + 1" ng-init="count=0" >Semana Santa</a>
+            <p>The button has been clicked {{count}} times.</p>
+            <a href="#">14 de Febrero</a>
+            <a href="#">Dia de Muertos</a>
+            <a href="#">Navidad</a>
+            <a href="#">16 de Septiembre</a>
+          </nav>
+
         </div>
         <div class="ed-item">
           <div class="gallery">
@@ -115,36 +114,7 @@
       </div>
     </section>
     <section>
-     <table id="datos" ng-controller="BreakinBadCharCtrl"> <!-- ng-controller define qué controlador se encargará de manejar la tabla-->
-
-  			<thead>
-
-  				<tr>
-
-  					<td>Nombre</td>
-
-  					<td>Apellido</td>
-
-  				</tr>
-
-  			</thead>
-
-  			<tbody>
-
-  				<tr ng-repeat="character in characters"> <!-- ng-repeat function como un "for" iterando la variable characters hidratada en el controlador -->
-
-  					<!-- Muestra los datos del registro -->
-
-  					<td>{{character.name}}</td> 
-
-  					<td>{{character.surname}}</td>
-
-  				</tr>
-
-  			</tbody>
-
- 		</table>
-
+     
       <div class="division abcenter column oscurecer">
         <div class="division__title">Contactanos</div>
         <div class="division__subtitle">Estamos a sus ordenes en San Salvador Huixcolotla</div>
@@ -155,6 +125,36 @@
 
     
         </div>
-      
+        <div ng-controller="controladorDatos">
+  <h1>A-Team</h1>
+  <p>{{equipo.historia}}</p>
+  <ul>
+    <li ng-repeat="intengrante in equipo.integrantes">
+      {{intengrante.rango}} {{intengrante.nombre}} {{intengrante.especialidad}}
+    </li>
+  </ul>
+</div>
+    <script type="text/javascript">
+  
+      var misDatos = angular.module('datosApp', []);
+ 
+      misDatos.controller('controladorDatos',function($scope,$http){
+ 
+    $scope.importar = function(){
+ 
+      $http.get('datos.json').success(function(datos){
+ 
+        $scope.equipo = datos;
+ 
+      });
+    }
+ 
+    $scope.importar();
+ 
+});
+ 
+</script>
+ 
+
   </body>
 </html>
